@@ -1,8 +1,8 @@
-import Client from "./vehicles/clients/Client";
-import Company from "./vehicles/consts/Company";
-import AiqfomeDelivery from "./vehicles/factories/AiqfomeDelivery";
-import IFoodDelivery from "./vehicles/factories/IFoodDelivery";
-import IDeliveryFactory from "./vehicles/factories/interfaces/IDeliveryFactory";
+import Client from "./delivery/clients/Client";
+import Company from "./delivery/consts/Company";
+import AiqfomeDelivery from "./delivery/factories/AiqfomeDelivery";
+import IFoodDelivery from "./delivery/factories/IFoodDelivery";
+import IDeliveryFactory from "./delivery/factories/interfaces/IDeliveryFactory";
 
 const currentCompany = Company.AIQFOME;
 let factory :IDeliveryFactory;
