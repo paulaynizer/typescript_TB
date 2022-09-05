@@ -9,9 +9,16 @@ export class DisciplinaService {
   private _disciplinas: Disciplina[] = []
 
   constructor() { 
-    let disciplina = new Disciplina("Teste",68, "optativa","1985-12-20", "1985-12-20",
-    30, "online", "joao" );
+    let disciplina = new Disciplina("Programação III", 68, "optativa", "1985-12-20", "1985-12-20",
+    30, "online", "Marcos Paulo" );
+    let disciplina2 = new Disciplina("Algoritmos", 68, "optativa", "1985-12-20", "1985-12-20",
+    30, "online", "Luciane L." );
     this.inserir(disciplina);
+    this.inserir(disciplina2);
+    this.inserir(disciplina);
+    this.inserir(disciplina2);
+    this.inserir(disciplina2);
+    this.inserir(disciplina2);
   }
 
   public get disciplinas(): Disciplina[]{

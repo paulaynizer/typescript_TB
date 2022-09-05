@@ -62,5 +62,8 @@ export class CadastrarPage implements OnInit {
 
     await alert.present();
   }
+  irParaHome(){
+    this.router.navigate(["/home"]);
+  }
 }
 
