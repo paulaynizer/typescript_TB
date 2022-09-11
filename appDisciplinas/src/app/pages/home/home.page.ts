@@ -11,16 +11,16 @@ import { DisciplinaService } from 'src/app/services/disciplina.service';
 export class HomePage {
 
   disciplinas: Disciplina[];
-  
+
   constructor(private router: Router, private disciplinaService :DisciplinaService) {
-    
+
     this.disciplinas = this.disciplinaService.disciplinas;
   }
   irParaCadastrar(){
     this.router.navigate(["/cadastrar"]);
   }
   irParaDetalhar(disciplina:Disciplina){
-    
+
     this.router.navigateByUrl("/detalhar", {state: {objeto:disciplina}});
   }
 

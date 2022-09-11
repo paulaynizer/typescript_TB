@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 import { CadastrarPageRoutingModule } from './cadastrar-routing.module';
 import { CadastrarPage } from './cadastrar.page';
 
-
 @NgModule({
   imports: [
     CommonModule,

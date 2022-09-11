@@ -8,16 +8,12 @@ export class DisciplinaService {
 
   private _disciplinas: Disciplina[] = []
 
-  constructor() { 
-    let disciplina = new Disciplina("Programação III", 68, "optativa", "1985-12-20", "1985-12-20",
-    30, "online", "Marcos Paulo" );
-    let disciplina2 = new Disciplina("Algoritmos", 68, "optativa", "1985-12-20", "1985-12-20",
-    30, "online", "Luciane L." );
-    this.inserir(disciplina);
-    this.inserir(disciplina2);
-    this.inserir(disciplina);
-    this.inserir(disciplina2);
-    this.inserir(disciplina2);
+  constructor() {
+    let disciplina2 = new Disciplina(
+    "Algoritmos", "Luciane L.",
+    68, "optativa",
+    "1985-11-20", "1985-12-20",
+    30, "online");
     this.inserir(disciplina2);
   }
 
@@ -29,20 +25,22 @@ export class DisciplinaService {
     this._disciplinas.push(disciplina);
   }
 
-  public editar(disciplina: Disciplina, nome : string, cargaHoraria: number,
-    natureza: string, dataInicio : string,
-    dataFim : string, vagas : number,
-    modalidade : string, professor : string) : boolean{
+  public editar(
+    disciplina: Disciplina,
+    nome : string, professor : string,
+    cargaHoraria: number, natureza: string,
+    dataInicio : string, dataFim :
+    string, vagas : number, modalidade : string) : boolean{
     for(let i=0; i<this._disciplinas.length; i++){
       if(this._disciplinas[i].id == disciplina.id){
         this._disciplinas[i].nome = nome;
+        this._disciplinas[i].professor = professor;
         this._disciplinas[i].cargaHoraria = cargaHoraria;
         this._disciplinas[i].natureza = natureza;
         this._disciplinas[i].dataInicio = dataInicio;
         this._disciplinas[i].dataFim = dataFim;
         this._disciplinas[i].vagas = vagas;
         this._disciplinas[i].modalidade = modalidade;
-        this._disciplinas[i].professor = professor;
         return true;
       }
     }

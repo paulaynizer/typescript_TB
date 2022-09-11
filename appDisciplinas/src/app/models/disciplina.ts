@@ -1,28 +1,29 @@
 export class Disciplina {
     private _nome: string;
+    private _professor : string;
     private _cargaHoraria: number;
     private _natureza: string;
     private _dataInicio : string;
     private _dataFim : string;
     private _vagas : number;
     private _modalidade : string;
-    private _professor : string;
     private _id : any;
 
-    constructor(nome : string, cargaHoraria: number,
-        natureza: string, dataInicio : string,
-        dataFim : string, vagas : number,
-        modalidade : string, professor : string ){
+    constructor(
+      nome : string, professor : string,
+      cargaHoraria: number, natureza: string,
+      dataInicio : string, dataFim : string,
+      vagas : number, modalidade : string){
         let chave = new Date;
         this._id = chave.getTime();
         this._nome = nome;
+        this._professor = professor;
         this._cargaHoraria = cargaHoraria;
         this._natureza = natureza;
         this._dataInicio = dataInicio;
         this._dataFim = dataFim;
         this._vagas = vagas;
         this._modalidade = modalidade;
-        this._professor = professor;
     }
     public get id() : any{
         return this._id;

@@ -3,7 +3,7 @@ ion-title {
 }
 
 ion-datetime {
-    color: black;
+    color: rgb(170, 170, 170);
 }
 ion-header{
     height: 60px;
@@ -19,13 +19,9 @@ ion-list{
     --ion-background-color:white;
     padding: 20px;
     padding-bottom: 20px;
-    height: 100%;
+    
 }
-.conteudo{
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-}
+
 ion-buttons{
     color: white;
 }
@@ -34,3 +30,12 @@ ion-button{
     --background-activated:#449878;
 }
 
+ion-fab-button{
+  --background:#9ce0c6;
+  --background-activated:#449878;
+}
+.conteudo{
+    width: 100%;
+  height: 100%;
+  margin: 0px;
+}
