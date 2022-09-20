@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DisciplinaService } from 'src/app/services/disciplina.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { DisciplinaFirebaseService } from 'src/app/services/disciplina-firebase.service';
 
 @Component({
   selector: 'app-cadastrar',
@@ -16,7 +17,8 @@ export class CadastrarPage implements OnInit {
 
   constructor(private alertController: AlertController,
     private router: Router,
-    private disciplinaService: DisciplinaService,
+    private loadingCtrl: LoadingController,
+    private disciplinaSF: DisciplinaFirebaseService,
     private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -48,9 +50,19 @@ export class CadastrarPage implements OnInit {
   }
 
   private cadastrar(){
-    this.disciplinaService.inserir(this.form_cadastrar.value);
-    this.presentAlert("Disciplinas", "Sucesso", "Disciplina cadastrado!");
-    this.router.navigate(["/home"]);
+    this.showLoading("Aguarde", 10000)
+    this.disciplinaSF.inserirDisciplina(this.form_cadastrar.value)
+    .then(()=>{
+      this.loadingCtrl.dismiss();
+      this.presentAlert("Disciplinas", "Sucesso", "Disciplina Cadastrado!");
+      this.router.navigate(["/home"]);
+    })
+    .catch((error)=>{
+      this.loadingCtrl.dismiss();
+      this.presentAlert("Disciplinas", "Erro", "Erro ao cadastrar");
+      console.log(error);
+    })
+    
   }
 
   async presentAlert(header: string, subHeader: string, message:string) {
@@ -65,6 +77,14 @@ export class CadastrarPage implements OnInit {
   }
   irParaHome(){
     this.router.navigate(["/home"]);
+  }
+  async showLoading(mensagem : string, duracao: number) {
+    const loading = await this.loadingCtrl.create({
+      message: mensagem,
+      duration: duracao,
+    });
+
+    loading.present();
   }
 }
 

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Disciplina } from 'src/app/models/disciplina';
 import { Alerts } from 'src/app/utils/Alerts';
-import { DisciplinaService } from 'src/app/services/disciplina.service';
+import { DisciplinaFirebaseService } from 'src/app/services/disciplina-firebase.service';
 
 @Component({
   selector: 'app-detalhar',
@@ -20,7 +20,7 @@ export class DetalharPage implements OnInit {
 
   constructor(private alertController: AlertController,
     private router: Router,
-    private disciplinaService: DisciplinaService,
+    private disciplinaFS: DisciplinaFirebaseService,
     private formBuilder:FormBuilder) { }
 
   ngOnInit() {
@@ -62,30 +62,15 @@ export class DetalharPage implements OnInit {
   }
 
   editar() {
-    if (!this.form_detalhar.valid) {
-      this.presentAlert('Disciplina','Error','Todos os campos são Obrigatórios!');
-    } else {
-      if (
-        this.disciplinaService.editar(
-          this.disciplina,
-          this.form_detalhar.value.nome,
-          this.form_detalhar.value.professor,
-          this.form_detalhar.value.cargaHoraria,
-          this.form_detalhar.value.natureza,
-          this.form_detalhar.value.dataInicio,
-          this.form_detalhar.value.dataFim,
-          this.form_detalhar.value.vagas,
-          this.form_detalhar.value.modalidade
-        )
-      ) {
-        this.router.navigate(['/home']);
-        console.log("Date I: " + this.disciplina.dataInicio)
-        console.log("Date F: " + this.disciplina.dataFim)
-        this.presentAlert('Disciplina', 'Sucesso', 'A disciplina foi editada!');
-      } else {
-        this.presentAlert('Disciplina', 'Error', 'Disciplina não encontrado!');
-      }
-    }
+    this.disciplinaFS.editarDisciplina(this.form_detalhar.value, this.disciplina.id)
+    .then(()=>{
+      this.presentAlert("Disciplinas", "Sucesso", "Disciplina Editada!");
+      this.router.navigate(["/home"]);
+    })
+    .catch((error)=>{
+      this.presentAlert("Disciplinas", "Erro", "Erro ao editar");
+      console.log(error);
+    })
   }
 
   excluir(){
@@ -94,13 +79,15 @@ export class DetalharPage implements OnInit {
   }
 
   private excluirContato(){
-    if(this.disciplinaService.excluir(this.disciplina)){
-      this.presentAlert("Disciplina","Excluir","Exclusão realizada!");
+    this.disciplinaFS.excluirDisciplina(this.disciplina)
+    .then(()=>{
+      this.presentAlert("Disciplinas", "Sucesso", "Disciplina Excluida!");
       this.router.navigate(["/home"]);
-    }
-    else{
-      this.presentAlert("Disciplina","Excluir","Contato não encontrado!");
-    }
+    })
+    .catch((error)=>{
+      this.presentAlert("Disciplinas", "Erro", "Erro ao excluir");
+      console.log(error);
+    })
   }
 
   irParaHome(){
