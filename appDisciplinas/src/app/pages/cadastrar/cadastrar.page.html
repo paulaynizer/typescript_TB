@@ -105,6 +105,11 @@
             <ion-radio slot="start" color="danger" value="hibrido"></ion-radio>
           </ion-item>
         </ion-radio-group>
+        <ion-item>
+          <ion-button  size="small" style="height: 40px;" shape="round">
+            <input type="file" formControlName="imagem" (change)="uploadFile($event.target)" />
+          </ion-button>
+        </ion-item>
         <br>
 
         <ion-button expand="block" type="submit">Cadastrar</ion-button>

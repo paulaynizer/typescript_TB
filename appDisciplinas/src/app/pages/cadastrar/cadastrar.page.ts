@@ -14,6 +14,7 @@ export class CadastrarPage implements OnInit {
   form_cadastrar : FormGroup;
   isSubmitted: boolean = false;
   data: string;
+  imagem: any;
 
   constructor(private alertController: AlertController,
     private router: Router,
@@ -31,10 +32,13 @@ export class CadastrarPage implements OnInit {
       dataFim: ["", [Validators.required]],
       vagas: ["", [Validators.required]],
       modalidade: ["", [Validators.required]],
-      professor: ["", [Validators.required]]
+      professor: ["", [Validators.required]],
+      imagem:["", [Validators.required]]
     });
   }
-
+  uploadFile(imagem : any){
+    this.imagem = imagem.files;
+  }
   get errorControl(){
     return this.form_cadastrar.controls;
   }
@@ -51,7 +55,8 @@ export class CadastrarPage implements OnInit {
 
   private cadastrar(){
     this.showLoading("Aguarde", 10000)
-    this.disciplinaSF.inserirDisciplina(this.form_cadastrar.value)
+    this.disciplinaSF
+    .enviarImagem(this.imagem, this.form_cadastrar.value)
     .then(()=>{
       this.loadingCtrl.dismiss();
       this.presentAlert("Disciplinas", "Sucesso", "Disciplina Cadastrado!");

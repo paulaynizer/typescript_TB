@@ -8,6 +8,7 @@ export class Disciplina {
     private _vagas : number;
     private _modalidade : string;
     private _id : any;
+    private _downloadURL : any;
 
     constructor(
       nome : string, professor : string,
@@ -76,5 +77,12 @@ export class Disciplina {
     }
     public set professor(professor: string){
         this._professor=professor;
+    }
+    public set dowloadURL(downloadURL : any){
+        this._downloadURL = downloadURL;
+    }
+    
+    public get dowloadURL(){
+        return this._downloadURL;
     }
 }
